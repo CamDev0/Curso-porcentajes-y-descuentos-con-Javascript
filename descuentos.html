@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcular porcentajes, descuentos, etc.</title>
+    <style>
+        html {
+            background-color:gray;
+        }
+    </style>
+</head>
+<body>
+    <h3>Calcular Precios con descuentos</h3>
+    <h6>Descuentos Manuales!</h6>
+    <label for="price">Precio original de este producto: </label>
+    <input id="price" type="number"> <br>
+    
+    <label for="discount">descuento de este producto: </label>
+    <input id="discount" type="number"> <br>
+    
+    <button id="calculator" type="button"> Calcular descuento</button>
+    <p class="result"></p>
+
+    <h6>Descuentos con Cupones!</h6>
+    <label for="nameCupon">Ingresa el nombre del producto: </label>
+    <input id="nameCupon" type="search"> <br>
+
+    <label for="priceCupon">Ingrese el precio del producto: </label>
+    <input id="priceCupon" type="number"> <br>
+    
+    <label for="cupon">Ingresa el cupón en mayùsculas por favor: </label>
+    <input id="cupon" type="search"> <br>
+
+    <button id="calculatorCupon" type="button">Click aquí para redimir!</button>
+    <p class="resultNameCupon"></p>
+    <p class="resultCupon"></p>
+</body>
+<script src="./descuentos.js"></script>
+</html>
