@@ -17,7 +17,7 @@ const btnCupon = document.querySelector('#calculatorCupon');
 const pCuponResult = document.querySelector('.resultCupon');
 const pCuponResultName = document.querySelector('.resultNameCupon');
 
-//Calcular porcentaje de descuento con cupones. Metodos de JS, mas efectivo.
+//Calcular porcentaje de descuento con cupones. Objetos de JS.
 const name_cupon_Methods = document.querySelector('#nameCuponMethods'); 
 const price_cupon_Methods = document.querySelector('#priceCuponMethods');
 const cuponRedimir_Methods = document.querySelector('#cuponMethods');
@@ -25,11 +25,32 @@ const btnCupon_Methods = document.querySelector('#calculatorCuponMethods');
 const pCuponResult_Methods = document.querySelector('.resultCuponMethods');
 const pCuponResultName_Methods = document.querySelector('.resultNameCuponMethods');
 
+//Calcular porcentaje de dcto con cupones. Metodos Filter. 
+
+const nameCuponFilter = document.querySelector('#name_Cupon_Filter'); 
+const priceCuponFilter = document.querySelector('#price_Cupon_Filter');
+const cuponRedimirFilter = document.querySelector('#cuponFilter');
+const btnCuponFilter = document.querySelector('#calculatorCuponFilter');
+const pCuponResultFilter = document.querySelector('.resultCuponFilter');
+const pCuponResultNameFilter = document.querySelector('.resultNameCuponFilter');
+
+
+//Calcular porcentaje de dcto con cupones. Metodos Find. 
+
+const nameCuponFind = document.querySelector('#name_Cupon_Find'); 
+const priceCuponFind = document.querySelector('#price_Cupon_Find');
+const cuponRedimirFind = document.querySelector('#cuponFind');
+const btnCuponFind = document.querySelector('#calculatorCuponFind');
+const pCuponResultFind = document.querySelector('.resultCuponFind');
+const pCuponResultNameFind = document.querySelector('.resultNameCuponFind');
+
 
 //2. Añadimos un evento al boton, para que cuando le den click, ejecute la función calcular
 btn.addEventListener('click', priceDiscountCalculator);
 btnCupon.addEventListener('click', priceDiscountCalculatorCupon);
 btnCupon_Methods.addEventListener('click', priceDiscountCalculatorCuponMethods);
+btnCuponFilter.addEventListener('click', priceDiscountMethodsFilter);
+btnCuponFind.addEventListener('click', priceDiscountMethodsFind);
 
 
 function priceDiscountCalculator() {
@@ -86,6 +107,8 @@ function priceDiscountCalculatorCupon() {
        
 }
 
+
+//Objeto con los datos de los cupones.
 const cuponObj = {
     'CAMILO30' : 30,
     'MAMA90' : 90,
@@ -97,6 +120,8 @@ const cuponObj = {
     'F20'  : 20
 
 }
+
+
 function priceDiscountCalculatorCuponMethods(){
     const priceCuponMethods = Number(price_cupon_Methods.value);
     const cuponMethods = cuponRedimir_Methods.value;
@@ -111,7 +136,10 @@ function priceDiscountCalculatorCuponMethods(){
 
     //Manera eficiente, podemos ingresar los cupones que queramos.
 
+    //Preguntamos si cuponObj, es igual a el cupon ingresado por el usuario.
     if (cuponObj[cuponMethods]){
+
+        //Si es así, guardamos el valor en una variable para luego sacar el dcto.
         discountMethods = cuponObj[cuponMethods];
     }
     else {
@@ -122,4 +150,117 @@ function priceDiscountCalculatorCuponMethods(){
     endPriceMethods = priceCuponMethods * (100 - discountMethods) / 100;
     pCuponResultName_Methods.innerText = '¡¡¡¡ ' + nameCuponMethods + ' !!!!'
     pCuponResult_Methods.innerText = '¡Felicidades!, haz obtenido un cupón del ' + discountMethods + '% . Precio Redimido: ' + endPriceMethods; 
+}
+
+
+
+//Array de objetos.
+const couponList = [];
+
+couponList.push({
+    name: 'CAMDCTO',
+    discount: 40,
+});
+
+couponList.push({
+    name: 'CAM50',
+    discount: 50,
+});
+
+couponList.push({
+    name: 'CAMDEV',
+    discount: 30,
+});
+
+couponList.push({
+    name: 'CAMDEV0',
+    discount: 20,
+});
+
+
+//Filter: Retorna un array.
+
+function priceDiscountMethodsFilter() {
+    const nameFilter = nameCuponFilter.value;
+    const priceFilter = Number(priceCuponFilter.value);
+    const nameFilterCoupon = cuponRedimirFilter.value;
+    let discountFilter;
+    let endPriceFilter;
+
+    if (!priceFilter || !nameFilterCoupon){
+        pCuponResultFilter.innerText = 'Por favor, rellene todos los campos del formulario.'
+        return;
+    }
+
+    //searchCoupon representa al couponList que declaramos arriba, si name es igual al cupon ingresado, retorna el arreglo con el name y el discount.
+    function isCouponInArray(searchCoupon){
+    
+        return searchCoupon.name == nameFilterCoupon;
+    }
+
+    //El método filter nos envía un arreglo. si tiene algun dato encontró el valor, sinó retorna un arreglo vacío.
+    const couponInArray = couponList.filter(isCouponInArray);
+
+    //Por lo tanto preguntamos si couponInArray es mayor a 0 para la validación.
+    if (couponInArray.length > 0 ){
+        //Si el filter retornó algo en el arreglo, le aplicamos a la variable el valor de descuento.
+        discountFilter = couponInArray[0].discount;
+    }
+    else {
+        //Si lo retornó vacío, entonces: 
+        pCuponResultFilter.innerText = 'Lo sentimos, este cupón no existé o ya expiró.'
+        return;
+    }
+
+ 
+
+    endPriceFilter = priceFilter * (100 - discountFilter) / 100;
+    pCuponResultNameFilter.innerText = '¡¡¡¡ ' + nameFilter + ' !!!!'
+    pCuponResultFilter.innerText = '¡Felicidades!, Has ganado un cupón del: ' +discountFilter+ '% .Precio redimido: ' + endPriceFilter;
+
+}
+
+
+
+//Find: Retorna un objeto.
+
+function priceDiscountMethodsFind() {
+    const nameFind = nameCuponFind.value;
+    const priceFind = Number(priceCuponFind.value);
+    const nameFindCoupon = cuponRedimirFind.value;
+    let discountFind;
+    let endPriceFind;
+
+    if (!priceFind || !nameFindCoupon){
+        pCuponResultFind.innerText = 'Por favor, rellene todos los campos del formulario.'
+        return;
+    }
+
+    //searchCoupon representa al couponList que declaramos arriba, si name es igual al cupon ingresado, retorna el objeto con el name y el discount.
+    function isCouponInArray(searchCoupon){
+    
+        return searchCoupon.name == nameFindCoupon;
+    }
+
+    //El método find nos envía un objeto. si tiene algun dato encontró el valor, sinó retorna un objeto vacío.
+    const couponInArray = couponList.find(isCouponInArray);
+
+    //Por lo tanto preguntamos si couponInArray es mayor a 0 para la validación.
+    if (couponInArray){
+        //Si el find retornó algo en el objeto, le aplicamos a la variable el valor de descuento.
+        discountFind = couponInArray.discount;
+    }
+    else {
+        //Si lo retornó vacío, entonces: 
+        pCuponResultFind.innerText = 'Lo sentimos, este cupón no existé o ya expiró.'
+        return;
+    }
+
+ 
+
+    endPriceFind = priceFind * (100 - discountFind) / 100;
+    pCuponResultNameFind.innerText = '¡¡¡¡ ' + nameFind + ' !!!!'
+    pCuponResultFind.innerText = '¡Felicidades!, Has ganado un cupón del: ' +discountFind+ '% .Precio redimido: ' + endPriceFind;
+   
+
 }
