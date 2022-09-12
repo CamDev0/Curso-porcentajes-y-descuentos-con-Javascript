@@ -81,23 +81,60 @@ function isImpar(arrayNum){
 
 //Function Calcular Mediana.
 
-function calcularMediana(arrayNum) {
+function calcularMediana(listDesordenada) {
+    const arrayNum = ordenarLista(listDesordenada);
     //La variable guarda true si es par or false si es impar.
     const listaesPar = isPar(arrayNum);
 
     if(listaesPar)
     {
         const indiceListaPar = Math.floor(arrayNum.length/2);
-        console.log(indiceListaPar);
         let num1 = arrayNum[indiceListaPar - 1];
         let num2 = arrayNum[indiceListaPar];
-        return console.log('La mediana de esta lista es: ' + (num1 + num2) / 2);
+        console.log('La mediana de esta lista es: ' + (num1 + num2) / 2);
     
 
     }else {
         const indiceListImpar = Math.floor(arrayNum.length / 2);
-        return console.log ("La mediana de esta lista es: " + arrayNum[indiceListImpar]);   
+        console.log ("La mediana de esta lista es: " + arrayNum[indiceListImpar]);   
     }
+    return arrayNum;
 }
 
-calcularMediana(arrayNum);
+
+//Método sort para ordenar arrays
+
+
+function ordenarLista (listDesordenada){
+
+    //Si la queremos ordenar de mayor a menor, solo hace falta poner que retorne el negativo primero y luego el positivo
+    
+    function ordenarListaSort(valorAcumulado, nuevoValor){
+/*         if (valorAcumulado > nuevoValor){
+            //Si le enviamos 1 o cualquier entero positivo al método sort, va a interpretar que el nuevo valor es menor que el que ya teníamos acumulado, por lo tanto hace el flip.
+            return 1;
+        } else if (valorAcumulado == nuevoValor) {
+            //Si le devolvemos 0, deja todo igual.
+            return 0;
+        } else {
+            //Si le enviamos -1 o cualquier negativo, va a interpretar que el nuevo valor es mayor que el que teníamos acumulado, por lo tanto hace el flip al contrario que cuando retorna un 1 < positivos.
+            return -1;
+        }
+         */
+
+        //Este return equivale a todo el if-else
+
+        return valorAcumulado - nuevoValor; //Menor-Mayor
+        /*
+        return 5 - 10 -> -5 flip 
+        return 5 - 5 -> 0 igual
+        return 10 - 5 -> 5 flip
+        Mayor- Menor -> return nuevoValor - valorAcumulado
+        */
+    }
+    //A estos métodos: sort, reduce, filter, etc, se les envía una función como parámetro para funcionar.
+    const lista = listDesordenada.sort(ordenarListaSort);
+    //Muy parecido al funcionamiento de reduce, solo que esta intercambia en vez de acumular y sumar los valores.
+
+    return lista;
+}
