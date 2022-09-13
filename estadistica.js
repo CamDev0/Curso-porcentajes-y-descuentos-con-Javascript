@@ -138,3 +138,62 @@ function ordenarLista (listDesordenada){
 
     return lista;
 }
+
+
+
+
+function calcularModa(list) {
+    //Objeto
+    const listaCount = {};
+
+     for (i = 0; i < list.length; i++) {
+         //La variable elemento va a recorrer cada elemento de list.
+        const elemento = list[i];
+
+        //Una vez elemento toma el valor de list, llega al siguiente if que le pregunta: 
+        //Si ya existe el elemento en listaCount,significa que es un número repetido, entonces vamos a sumarle 1 a su valor, 
+
+        if (listaCount[elemento]){
+            listaCount[elemento] += 1;
+        }
+
+        //Si no existe el elemento en ListaCount, entonces le asignamos un 1, así cada vez que se repita, va a entrar al if, y se le va a sumar 1.
+
+        else{
+            listaCount[elemento] = 1;
+        }
+        
+     }
+     //Al salir del for, ya el objeto queda lleno con el nombre del elemento, y las veces que se repite como valor Ej: {'1':2, '2':1, '3':4,...}
+     
+     //Creamos un arreglo de arreglos [[],[],[]...] que contenga los atributos de listaCount, quedaría: [[1,2],[2,1],[3,4]...] 
+
+     /*Object.keys(listaCount) -> (Nombre de los atributos del objeto)
+     Object.values(listaCount) -> (valores de los atributos del objeto)
+     Object.entries(listaCount) -> (Nombres y valores de los atributos del objeto)
+     */
+    const listaArray = Object.entries(listaCount);
+    
+    //Le mandamos a la función ordenarListaBidimensional la lista a ordenar, y la posición del array que queremos ordenar. en este caso la 2 posición del array, por lo cuál sería = [1].
+    const listaArrayOrdenada = ordenarListaBidimensional(listaArray, 1);
+
+    //Ya ordenado el arreglo de menor a mayor, agarramos el último valor del arreglo que vendría a ser el que mas se repite, por lo tanto, sería la moda.
+    const moda = listaArrayOrdenada[listaArrayOrdenada.length - 1] //Se trae dos valores, el número y las veces que se repite..
+    
+    const modaFinal = moda[0]; //Por lo tanto, creamos otra variable, sólo para guardar el número, sin las veces que se repita.
+    return modaFinal;
+    
+}
+
+function ordenarListaBidimensional(listModaDesordenada,i){
+    
+    function ordenarListaSort(valorAcumulado, nuevoValor){
+        //[[1,2*],[2,1*],[3,1*]]
+        //La idea es ordenar el arreglo de arreglos con el 2 elemento del array en este caso, por lo tanto cuando se llame la función, i = 1. pero se podría ordenar desde cualquier posición un array. 
+        return valorAcumulado[i] - nuevoValor[i]; 
+    }
+    
+    //En esta variable guardamos la lista completamente ordenada, pasada por la función ordenarListaSort, y la retornamos.
+    const lista = listModaDesordenada.sort(ordenarListaSort);
+    return lista;
+}
