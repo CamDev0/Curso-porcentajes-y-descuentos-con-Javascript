@@ -1,17 +1,19 @@
+const PlatziMath = {};
+
 //Método reduce.
 
 let array = [100,200,300,400,500];
 let arrayArrow = [200,600,600,100,900];
 //let cont = 0;
 
-function calcularPromedio(list){
+PlatziMath.calcularPromedio = function calcularPromedio(list){
 /*   for (i = 0; i < list.length; i++){
     cont = cont + list[i];
   }
  */
   
   //valorAcum, hace el papel del cont que se usó en el for, y nuevoValor hace algo parecido a i, recorrer los valores e ir sumandose con el acumulador.
-  function sumarTodosElementos(valorAcumulado, nuevoValor){
+  PlatziMath.sumarTodosElementos = function sumarTodosElementos(valorAcumulado, nuevoValor){
     return valorAcumulado + nuevoValor;
   }
 
@@ -21,8 +23,6 @@ function calcularPromedio(list){
   return sumaTotal;
 }
 
-const result = calcularPromedio(array);
-console.log('El promedio de los datos ingresados es: ' + result / array.length); 
 
 
 //Arrow functions, sintaxis mas corta.
@@ -39,7 +39,7 @@ const calcularPromedioArrowFunctions = (list) => {
 }
     
     const resultArrow = calcularPromedioArrowFunctions(arrayArrow);
-    console.log('El promedio de los datos ingresados es: ' + resultArrow / arrayArrow.length); 
+  //  console.log('El promedio de los datos ingresados es: ' + resultArrow / arrayArrow.length); 
     
 
 
@@ -49,7 +49,7 @@ const calcularPromedioArrowFunctions = (list) => {
 
 //Suma todos los datos del array, en este caso a, toma el valor de acumulador, empieza en 0. b es parecido a i en el for, hace el recorrido tomando todos los valores del array y se va sumando con a.
 const sumaNum = array.reduce((a,b) => a + b);
-console.log("La suma de los valores del array es: " + sumaNum);
+//console.log("La suma de los valores del array es: " + sumaNum);
 
 
 /************************************************************* */
@@ -61,19 +61,19 @@ const arrayNum = [10,20,30,60,50,60,10,40];
 const isNumPar = arrayNum.reduce((acumulador, valor) => acumulador + valor);
 
 if (isNumPar % 2 == 0){
-    console.log('El número es par, ' + isNumPar);
+    //console.log('El número es par, ' + isNumPar);
 } else{
     console.log ('El número es impar, ' + isNumPar);
 }
 
 //Funcion para saber si el tamañp de un array es  par o impar.
 
-function isPar(arrayNum){
+PlatziMath.isPar = function isPar(arrayNum){
     //Si la función si es par, retorna el 0 del residuo, por lo tanto retorna un false, por eso le negamos la condicion, para que pueda retornar true.
     return !(arrayNum.length % 2);
 }
 
-function isImpar(arrayNum){
+PlatziMath.isImpar = function isImpar(arrayNum){
     //Aca es todo lo contrario, si es impar, el residuo nunca sería 0, entonces lo dejamos normal para que pueda retornar un true.
     return arrayNum.length % 2;
 }
@@ -81,7 +81,7 @@ function isImpar(arrayNum){
 
 //Function Calcular Mediana.
 
-function calcularMediana(listDesordenada) {
+PlatziMath.calcularMediana = function calcularMediana(listDesordenada) {
     const arrayNum = ordenarLista(listDesordenada);
     //La variable guarda true si es par or false si es impar.
     const listaesPar = isPar(arrayNum);
@@ -105,7 +105,7 @@ function calcularMediana(listDesordenada) {
 //Método sort para ordenar arrays
 
 
-function ordenarLista (listDesordenada){
+PlatziMath.ordenarLista = function ordenarLista (listDesordenada){
 
     //Si la queremos ordenar de mayor a menor, solo hace falta poner que retorne el negativo primero y luego el positivo
     
@@ -140,9 +140,7 @@ function ordenarLista (listDesordenada){
 }
 
 
-
-
-function calcularModa(list) {
+PlatziMath.calcularModa = function calcularModa(list) {
     //Objeto
     const listaCount = {};
 
@@ -185,7 +183,7 @@ function calcularModa(list) {
     
 }
 
-function ordenarListaBidimensional(listModaDesordenada,i){
+PlatziMath.ordenarListaBidimensional = function ordenarListaBidimensional(listModaDesordenada,i){
     
     function ordenarListaSort(valorAcumulado, nuevoValor){
         //[[1,2*],[2,1*],[3,1*]]
