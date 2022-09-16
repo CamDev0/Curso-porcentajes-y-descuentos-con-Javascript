@@ -82,23 +82,23 @@ PlatziMath.isImpar = function isImpar(arrayNum){
 //Function Calcular Mediana.
 
 PlatziMath.calcularMediana = function calcularMediana(listDesordenada) {
-    const arrayNum = ordenarLista(listDesordenada);
+    const arrayNum = PlatziMath.ordenarLista(listDesordenada);
     //La variable guarda true si es par or false si es impar.
-    const listaesPar = isPar(arrayNum);
+    const listaesPar = PlatziMath.isPar(arrayNum);
 
     if(listaesPar)
     {
         const indiceListaPar = Math.floor(arrayNum.length/2);
         let num1 = arrayNum[indiceListaPar - 1];
         let num2 = arrayNum[indiceListaPar];
-        console.log('La mediana de esta lista es: ' + (num1 + num2) / 2);
+        return (num1 + num2) / 2;
     
 
     }else {
         const indiceListImpar = Math.floor(arrayNum.length / 2);
-        console.log ("La mediana de esta lista es: " + arrayNum[indiceListImpar]);   
+       return arrayNum[indiceListImpar];   
     }
-    return arrayNum;
+   // return arrayNum;
 }
 
 
