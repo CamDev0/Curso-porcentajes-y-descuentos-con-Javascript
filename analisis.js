@@ -45,7 +45,7 @@ function proyeccionXPersona (namePerson) {
     //Calculamos el aumento efectivo
     const aumento = salarioFinal * medianaIncrementoPorcentaje;
     //Retornamos el salario Final mas el aumento
-    return Math.floor(salarioFinal + aumento);
+    return Math.floor(salarioFinal + aumento).toFixed(2);
     
 }
 
@@ -82,5 +82,144 @@ for (person of salarios) {
 
     }
 }
-console.log({empresas});
 /**De este for sale cada empresa convertida en un objeto, que va a tener como propiedad los años en los que los empleados trabajaron, y como valor un arreglo que guarda cada salario por año que ganó cada empleado cuando trabajó en esa empresa */
+
+//Mediana por año de cada empresa.
+
+function medianaEmpresaYear(nombre, year){
+    if (!empresas[nombre]) {
+        console.warn('La empresa no existe.');
+    } 
+    else if(!empresas[nombre][year]) {
+        console.warn('La empresa no dió salarios ese año.');
+    }
+    else {
+        return PlatziMath.calcularMediana(empresas[nombre][year])
+    }
+}
+
+//Proyección de cada empresa
+
+function proyeccionXEmpresa (name) {
+    if (!empresas[name]) {
+        console.warn('No existe esta empresa.');
+    }
+    else {
+        //Creamos un arreglo a partir del objeto empresas, que contenga el name(año), y sus valores(arreglo de salarios ese año).
+        const empresaYears = Object.keys(empresas[name]);
+        
+        //listaMedianaYears va a hacer un map a empresaYears, donde va a recibir los años donde se encuentran los arreglos de salarios y los va a mandar a la función medianaEmpresaYear para sacarles la mediana a cada año
+        const listaMedianaYears = empresaYears.map(function(year){
+            return medianaEmpresaYear(name, year);
+            //[800, 900, 1000, 850] retorna un arreglo con las medianas de cada empresa, cada año.
+        })
+       
+    
+         //Misma lógica de proyeccionXPersona
+        let incrementoPorcentaje = [];
+
+        for (i = 1; i < listaMedianaYears.length; i++){
+            const salarioActual = listaMedianaYears[i];
+            const salarioAnterior = listaMedianaYears[i - 1];
+            const crecimiento = salarioActual - salarioAnterior;
+            const porcentajeCrecimiento = crecimiento / salarioAnterior;  
+            incrementoPorcentaje.push(porcentajeCrecimiento);
+        }
+        const medianaIncrementoPorcentaje = PlatziMath.calcularMediana(incrementoPorcentaje);
+
+        const medianaFinal = listaMedianaYears[listaMedianaYears.length - 1];
+        const aumento = medianaFinal * medianaIncrementoPorcentaje;
+        return Math.floor(medianaFinal + aumento).toFixed(2);
+    }
+
+}
+
+
+
+//Análisis General
+
+function medianaGeneral() {
+    //Creamos un array con todos los nombres
+    const nombres = salarios.map(personas => personas.name);
+    //Creamos otro array que guarde la mediana de salarios de cada nombre.
+    const medianaXNombre = nombres.map(nombre => medianaXPersona(nombre));
+
+    const mediana = PlatziMath.calcularMediana(medianaXNombre);
+
+    return mediana;
+};
+
+function medianaGeneralTop10Personas(){
+    const listaMedianas = salarios.map((iterador) => medianaXPersona(iterador.name));
+
+    //Sabemos que .sort recibe dos parámetros para poder comparar, lo nuevo es .slice, que le dice al método sort, el rango de valores que va a retornar.
+    const top10 = listaMedianas.sort((a,b) => b-a).slice(0,10);
+
+    return PlatziMath.calcularMediana(top10);
+}
+
+function medianaGeneralTop10PorcentajePersonas(){
+    const listaMedianas = salarios.map((iterador) => medianaXPersona(iterador.name));
+
+    const top10Porcentaje = listaMedianas.sort((a,b) => b-a).slice(0,2);
+
+    return PlatziMath.calcularMediana(top10Porcentaje);
+}
+
+
+//Funciones Agregadas Propias (reto 2 del curso.)
+function promedioMayorMenorSalario(name) {
+    if (!empresas[name]) {
+        console.warn('No existe esta empresa.');
+    }
+    else {
+        
+        const empresaYears = Object.values(empresas[name]);
+        const salarioMenor = empresaYears.map((element)=>{
+            let min = Math.min(...element);
+            return min;
+        });
+        
+        const salarioMayor = empresaYears.map((element)=>{
+            let max= Math.max(...element);
+            return max;
+        });
+        
+        let promedioSalarios = [];
+        for (i = 0; i < salarioMayor.length; i++) {
+            promedioSalarios[i] = (salarioMayor[i] + salarioMenor[i]) / 2; 
+        }
+        
+        return promedioSalarios;
+    }
+}
+
+function Top10PersonasMayorMediana(){
+    //Sacamos de nuevo la medianaXPersona, solo que de otra manera.
+    const listaMedianas = salarios.map((iterador) => medianaXPersona(iterador.name));
+
+    //Sabemos que .sort recibe dos parámetros para poder comparar, lo nuevo es .slice, que le dice al método sort, el rango de valores que va a retornar.
+    const top10 = listaMedianas.sort((a,b) => b-a).slice(0,10);
+
+    return top10;
+}
+
+function Top10PorcentajePersonasMayorMediana(){
+    //Sacamos de nuevo la medianaXPersona, solo que de otra manera.
+    const listaMedianas = salarios.map((iterador) => medianaXPersona(iterador.name));
+    
+    //Sabemos que .sort recibe dos parámetros para poder comparar, lo nuevo es .slice, que le dice al método sort, el rango de valores que va a retornar.
+    const top10 = listaMedianas.sort((a,b) => b-a).slice(0,2);
+    
+    return top10;
+}
+
+function Top30PorcentajePersonasMayorMediana(){
+    //Sacamos de nuevo la medianaXPersona, solo que de otra manera.
+    const listaMedianas = salarios.map((iterador) => medianaXPersona(iterador.name));
+    
+    //Sabemos que .sort recibe dos parámetros para poder comparar, lo nuevo es .slice, que le dice al método sort, el rango de valores que va a retornar.
+    const top10 = listaMedianas.sort((a,b) => b-a).slice(0,6);
+    
+    return top10;
+}
