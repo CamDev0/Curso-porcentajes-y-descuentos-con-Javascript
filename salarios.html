@@ -10,26 +10,121 @@
 <body>
     <h3>Salarios: Análisis salarial</h3>
 
-    <h5>Abra el inspector de elementos y dirijase a la consola por favor.</h5>
+    <h5> ***Abra el inspector de elementos y dirijase a la consola por favor.***</h5>
 
     <h5>Nombres: </h5>
     <p><b>Camilo, Gabriel, Nath, Leidy, Maria, Wilder, Freddy, Clareth, Armando, Dilan, Samir, Diego,
         Alicia, Teo, Lina, Ivan, Juan, Dominic, Loraine, Daniela.
     </b></p>
 
+    <h5>Empresas: </h5>
+    <p>
+    <b>
+        Freelance, Industrias Mokepon, MarketerosCOL, Mokepon, Inversionify, Wayne Enterprises, Daily Planet, LexCorp.
+    </b>
+    </p>
+
+    <hr>
+
+        <h4>Análisis Personal</h4>
     <ul>
         <li><b>Función medianaXPersona()</b></li>
         <p> Va a encontrar la mediana de salarios del nombre de la persona que le ingresemos cómo parámetro, basandose
             en los salarios que tiene registrada esa persona. <br>
         <b>Ej: medianaXPersona('Camilo');</b>
         </p>
+
         <br>
+
         <li><b>Función proyeccionXPersona()</b></li>
-        <p>Va a encontrar la proyección o pronóstico sencillo para el salario del seguiente año del nombre de la persona
+        <ul>Va a encontrar la proyección o pronóstico sencillo para el salario del seguiente año del nombre de la persona
            que le ingresemos como parámetro, basandose en sus salarios en los años anteriores. <br>
            <b>Ej: proyeccionXPersona('Nath');</b> 
-        </p>
+
         <br>
+
+        <li><b>Función encontrarPersona()</b> </li>
+        <p> Va a encontrar los trabajos, salarios, empresa y años de trabajo de la persona que busquemos<br>
+        <b>Ej: encontrarPersona('Gabriel');</b>
+        </p>
+        
+    </ul>
+
+    <hr>
+        <h4>Análisis Empresarial: Por cada empresa</h4>
+
+    <ul>
+        <li><b>Función medianaEmpresaYear()</b></li>
+        <p>Va a encontrar la mediana de salarios por cada año de la empresa, mandandole el nombre de la empresa y el año del que queremos obtener la mediana.<br>
+            <b>Ej: medianaEmpresaYear('Freelance', 2020);</b> 
+        </p>
+
+        <br>
+
+        <li><b>Función proyeccionXEmpresa()</b></li>
+        <p>Va a calcular la proyección que ha tenido la empresa a lo largo de todos sus años, solo hay que indicarle el nombre de la empresa a analizar.<br>
+            <b>Ej: proyeccionXEmpresa('Mokepon');</b> 
+        </p>
+
+    </ul>
+    <hr>
+        <h4>Análisis Empresarial General: Todas las empresas</h4>
+
+    <ul>
+        <li><b>Función medianaGeneral()</b></li>
+        <p>Va a encontrar la mediana general de salarios de todas las empresas que se encuentran ingresadas.<br>
+            <b>Ej: medianaGeneral();</b> 
+        </p>
+
+        <br>
+
+        <li><b>Función Top10PersonasMayorMediana()</b></li>
+        <p>Va a calcular la mediana de los salarios de las 10 personas que mas han ganado a lo largo de los años trabajando.<br>
+            <b>Ej: Top10PersonasMayorMediana();</b> 
+        </p>
+
+        <br>
+
+        <li><b>Top10PorcentajePersonasMayorMediana()</b></li>
+        <p>Va a calcular la mediana de los salarios del 10% de las personas que mas han ganado a lo largo de los años trabajando.<br>
+            <b>Ej: Top10PorcentajePersonasMayorMediana();</b> 
+        </p>
+
+        <br>
+
+        <li><b>Top30PorcentajePersonasMayorMediana()</b></li>
+        <p>Va a calcular la mediana del 30% de personas que mas han ganado a lo largo de los años.<br>
+            <b>Ej: Top30PorcentajePersonasMayorMediana();</b> 
+        </p>
+  
+        <br>
+
+        <li><b>Función promedioMayorMenorSalario()</b></li>
+        <p>Va a calcular el promedio entre el mayor y menor salario de cada año, pasandole el nombre de la empresa.<br>
+            <b>Ej: promedioMayorMenorSalariol('MarketerosCOL');</b> 
+        </p>
+
+        <br>
+
+        <li><b>medianaGeneralTop10Personas()</b></li>
+        <p>Va a calcular la mediana General del top 10 de personas con mayor salario.<br>
+            <b>Ej: medianaGeneralTop10Personas();</b> 
+        </p>
+
+        <br>
+
+        <li><b>medianaGeneralTop10PorcentajePersonas()</b></li>
+        <p>Va a calcular la mediana General de los salarios del 10% de personas que mas ganan.<br>
+            <b>Ej: medianaGeneralTop10PorcentajePersonas();</b> 
+        </p>
+
+        <br>
+    </ul>
+    <hr>
+        <h4>Busquedas Generales</h4>
+
+    <ul>
+
         <li><b>salarios</b></li>
         <p>
             Nos muestra toda la información de los salarios, años, nombres y empresa en las que trabajaron. 

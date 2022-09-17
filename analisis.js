@@ -223,3 +223,5 @@ function Top30PorcentajePersonasMayorMediana(){
     
     return top10;
 }
+
+//Proximo a añadir: top personas con menor salario, salario promedio de todas las empresas, etc...
