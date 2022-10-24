@@ -1,9 +1,23 @@
 //Análisis personal
-                        
-function encontrarPersona(personaABuscar) {
-                    //persona = Parámetro que recorre el arreglo
-    return salarios.find(persona => persona.name == personaABuscar);
+                
+const inputPersonName = document.querySelector('#namePerson');
+const btnPersonName = document.querySelector('#searchPerson');
+
+btnPersonName.addEventListener('click', namePersonArgument);
+
+function namePersonArgument()
+{
+    const personName = inputPersonName.value;
+    console.log(encontrarPersona(personName));
+    
 }
+
+function encontrarPersona(personName) {
+        //persona = Parámetro que recorre el arreglo
+        return salarios.find(persona => persona.name == personName); 
+        
+}
+
 
 function medianaXPersona (namePerson) {
     //.trabajos al final, es para que nos traiga el arreglo de objetos llamado así que contiene el salario, el año y la empresa.
